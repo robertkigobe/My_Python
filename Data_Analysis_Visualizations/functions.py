@@ -160,8 +160,30 @@ print (Extract)
          
 
 
+# ## Defining and Calling Functions for Data Cleaning
+
+# In[17]:
+
+
+def CleanData_Sales(cell):
+    if (cell=="n.a." or cell=="-1" or cell=="not avilable"):
+        return 0
+    return cell
+         
+def CleanData_REGION(cell):
+    if (cell=="n.a." or cell=="-1" or cell=="not avilable"):
+        return 'AbuDhabi'
+    return cell
+
+
 # In[ ]:
 
 
-
+sales = pd.read_csv("Sales.csv", nrows=7, converters={
+                          "SALES_BY_REGION": CleanData_REGION,
+                          "JANUARY": CleanData_Sales,
+                          "FEBRUARY": CleanData_Sales,
+                          "APRIL": CleanData_Sales,
+                          })
+sales.head(20)
 
